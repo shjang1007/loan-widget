@@ -10,7 +10,15 @@ app.use(bodyParser.json());
 
 // Get loan info
 app.get("/", (req, res) => {
-  res.send("Let's help save the world!");
+  const loanInterestRateList = {
+    subsidizedLoan: "3.76",
+    unsubsidizedLoan: "3.76",
+    privateBank: "4.2",
+    university: "4"
+  };
+
+  // Send requested from loanInterestRateList
+  res.send(loanInterestRateList.privateBank);
 });
 
 // Start app with "node server.js" with anonymous callback to log
