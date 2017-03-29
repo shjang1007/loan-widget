@@ -9,14 +9,14 @@ const port = process.env.PORT || 8080;
 
 // Middleware
 app.use(sassMiddleware({
-    src: __dirname,
-    dest: path.join(__dirname, 'public'),
+    src: __dirname + "/sass",
+    dest: __dirname + "/public/styles",
     debug: true,
-    outputStyle: 'compressed',
-    prefix:  '/prefix'
+    outputStyle: 'compressed'
 }));
+
 app.use(bodyParser.json());
-app.use(express.static(__dirname + "/app"));
+app.use(express.static(__dirname + "/public"));
 
 // Get loan info
 app.get("/interest-rates", (req, res) => {
