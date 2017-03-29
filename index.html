@@ -6,6 +6,7 @@
 
     <!-- Styling -->
     <link rel="stylesheet" type="text/css" href="styles/reset.css"></link>
+    <link rel="stylesheet" type="text/css" href="styles/main.css"></link>
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
@@ -40,22 +41,34 @@
         <li>{{ intRate.loan }}: {{ intRate.rate }}</li>
       </ul>
 
-      <form>
-        <label for="loan-amount">
-          Loan Amount:
-          <input id="loan-amount" type="text" ng-model="loanAmount">
-        </label>
-        <label for="interest-rate">
-          Loan Amount:
-          <input id="interest-rate" type="number" ng-model="interestRate">
-        </label>
-        <label for="loan-period">
-          Loan Amount:
-          <input id="loan-period" type="number" ng-model="loanPeriod">
-        </label>
+      <section class="card-container">
+        <div id="card" ng-class="{flipped: isFlipped}">
+          <figure class="front">
+            <form>
+              <p ng-show="invalidSubmit">You must fill in all the things!</p>
+              <label for="loan-amount">
+                Loan Amount:
+                <input id="loan-amount" type="number" ng-model="loanAmount">
+              </label>
+              <label for="interest-rate">
+                Loan Amount:
+                <input id="interest-rate" type="number" ng-model="interestRate">
+              </label>
+              <label for="loan-period">
+                Loan Amount:
+                <input id="loan-period" type="number" ng-model="loanPeriod">
+              </label>
 
-        <button type="button" ng-click="">Calculate</button>
-      </form>
+              <button type="button" ng-click="handleSubmit()">Calculate</button>
+            </form>
+          </figure>
+
+          <figure class="back">
+            Pickaboo!
+            <button type="button" ng-click="isFlipped = !isFlipped">Return to Data</button>
+          </figure>
+        </div>
+      </section>
     </main>
   </body>
 </html>
