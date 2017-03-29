@@ -1,12 +1,20 @@
 // Set up express and port
 const express = require("express");
 const bodyParser = require("body-parser");
+const sassMiddleware = require("node-sass-middleware");
 
 const app = express();
 const port = process.env.PORT || 8080;
 
 
 // Middleware
+app.use(sassMiddleware({
+    src: __dirname,
+    dest: path.join(__dirname, 'public'),
+    debug: true,
+    outputStyle: 'compressed',
+    prefix:  '/prefix'
+}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/app"));
 
