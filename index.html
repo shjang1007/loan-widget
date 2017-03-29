@@ -35,8 +35,27 @@
       </ul>
     </header>
     <h1>Loan Calculator</h1>
-    <div ng-controller="MainCtrl">
-      {{ intRates }}
-    </div>
+    <main ng-controller="MainCtrl">
+      <ul ng-repeat="intRate in intRates">
+        <li>{{ intRate.loan }}: {{ intRate.rate }}</li>
+      </ul>
+
+      <form>
+        <label for="loan-amount">
+          Loan Amount:
+          <input id="loan-amount" type="text" ng-model="loanAmount">
+        </label>
+        <label for="interest-rate">
+          Loan Amount:
+          <input id="interest-rate" type="number" ng-model="interestRate">
+        </label>
+        <label for="loan-period">
+          Loan Amount:
+          <input id="loan-period" type="number" ng-model="loanPeriod">
+        </label>
+
+        <button type="button" ng-click="">Calculate</button>
+      </form>
+    </main>
   </body>
 </html>
