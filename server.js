@@ -3,13 +3,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
+
 
 // Middleware
 app.use(bodyParser.json());
+app.use(express.static(__dirname + "/app"));
 
 // Get loan info
-app.get("/", (req, res) => {
+app.get("/interest-rates", (req, res) => {
   const loanInterestRateList = {
     subsidizedLoan: "3.76",
     unsubsidizedLoan: "3.76",
@@ -18,7 +20,12 @@ app.get("/", (req, res) => {
   };
 
   // Send requested from loanInterestRateList
-  res.send(loanInterestRateList.privateBank);
+  res.send(loanInterestRateList);
+});
+
+  // load the single view file
+app.get('*', (req, res) => {
+    res.sendfile("index.html");
 });
 
 // Start app with "node server.js" with anonymous callback to log

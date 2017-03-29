@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html an-app="loanWidget">
+<html ng-app="loanWidget">
   <head>
     <meta charset="utf-8">
     <title>Loan Widget</title>
 
     <!-- Styling -->
-    <link rel="stylesheet" type="text/css" href="app/lstylesheets/reset.scss"></link>
-    <!-- <link rel="stylesheet" type="text/css" href="./css/puyo.scss"></link> -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/reset.scss"></link>
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 
     <!-- Load angular and app file -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
-    <script src="app/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+    <script src="app.js"></script>
   </head>
   <body>
     <header>
@@ -36,5 +35,8 @@
       </ul>
     </header>
     <h1>Loan Calculator</h1>
+    <div ng-controller="MainCtrl">
+      {{ intRates }}
+    </div>
   </body>
 </html>
