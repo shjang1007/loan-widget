@@ -13,8 +13,8 @@
 
     <!-- Load angular and app file -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-charts/0.2.7/angular-charts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body>
@@ -66,7 +66,11 @@
           </figure>
 
           <figure class="back">
-            Pickaboo!
+            <div ng-controller="BarCtrl">
+              {{ first }}
+              <canvas class="chart chart-bar" chart-data="data" chart-labels="labels"
+                chart-options="options" chart-series="series"></canvas>
+            </div>
             <button type="button" ng-click="isFlipped = !isFlipped">Return to Data</button>
           </figure>
         </div>
