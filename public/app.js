@@ -1,5 +1,9 @@
-const app = angular.module("loanWidget", ["chart.js"]);
+const app = angular.module("loanWidget", ["chart.js"])
 
+// Require lodash
+app.constant('_', window._);
+
+// Service to fetch interest rates from node api
 app.factory("intRates", ["$http", ($http) => {
   return {
     get: () => {
@@ -8,38 +12,46 @@ app.factory("intRates", ["$http", ($http) => {
   };
 }]);
 
-app.controller("BarCtrl", ["$scope", ($scope) => {
-  $scope.first = $scope.$parent.intRates;
-  // Define a function that will take params of upper scope?
-
-  // labels will be x-axis and series will be y-axis values
-  $scope.labels = ['1', '2', '3', '4', '5', '6', '7'];
-  $scope.series = ['Interest', 'Principal'];
-
-  $scope.data = [
-   [15000, 12500, 10000, 7500, 5000, 2500, 0],
-   [30000, 25000, 20000, 15000, 10000, 5000, 2500]
- ];
-
- // Possibly have to add legend display to display detailed info
- $scope.options = {
-   scales: {
-     xAxes: [{stacked: true}],
-     yAxes: [{stacked: true}]
-   }
-  };
-}]);
-
-app.controller("MainCtrl", ["$scope", "intRates", ($scope, intRates) => {
+app.controller("MainCtrl", ["$scope", "intRates", "_",
+  ($scope, intRates, _) => {
   // Variables to help toggle show and class
   $scope.invalidSubmit = false;
   $scope.isFlipped = false;
+  $scope.loanData = {};
 
   // Function that will handle form submission.
   $scope.handleSubmit = () => {
-    if ($scope.loanAmount && $scope.interestRate && $scope.loanPeriod) {
+    const { loanAmount, interestRate, loanPeriod }  = $scope.loanData;
+    if (loanAmount && interestRate && loanPeriod) {
       $scope.invalidSubmit = false;
       $scope.isFlipped = true;
+      const monthlyIR = interestRate / 12;
+      $scope.monthlyPayment = (loanAmount * monthlyIR) / (1 - (1 + monthlyIR) ** -loanPeriod);
+      $scope.labels = _.range(1, $scope.loanData.loanPeriod + 1);
+      $scope.series = ["Principal", "Interest"];
+
+      let balance = loanAmount;
+      const balances = [];
+      const principals = [];
+      const interests = [];
+      while (balance > 0) {
+        let interest = balance * monthlyIR;
+        let principal = $scope.monthlyPayment - interest;
+        balance -= principal;
+        interests.push(interest);
+        principals.push(principal);
+        balances.push(balance)
+      }
+
+      $scope.data = [principals, interests];
+
+     // Possibly have to add legend display to display detailed info
+     $scope.options = {
+       scales: {
+         xAxes: [{stacked: true}],
+         yAxes: [{stacked: true}]
+       }
+      };
     } else {
       $scope.invalidSubmit = true;
     }

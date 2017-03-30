@@ -15,6 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
     <script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body>
@@ -50,26 +51,24 @@
               <p ng-show="invalidSubmit">You must fill in all the things!</p>
               <label for="loan-amount">
                 Loan Amount:
-                <input id="loan-amount" type="number" ng-model="loanAmount">
+                <input id="loan-amount" type="number" ng-model="loanData.loanAmount">
               </label>
               <label for="interest-rate">
-                Loan Amount:
-                <input id="interest-rate" type="number" ng-model="interestRate">
+                Interest Rate:
+                <input id="interest-rate" type="number" ng-model="loanData.interestRate">
               </label>
               <label for="loan-period">
-                Loan Amount:
-                <input id="loan-period" type="number" ng-model="loanPeriod">
+                Loan Period:
+                <input id="loan-period" type="number" ng-model="loanData.loanPeriod">
               </label>
 
               <button type="button" ng-click="handleSubmit()">Calculate</button>
             </form>
           </figure>
-
           <figure class="back">
-            <div ng-controller="BarCtrl">
-              <canvas class="chart chart-bar" chart-data="data" chart-labels="labels"
-                chart-options="options" chart-series="series"></canvas>
-            </div>
+            {{ monthlyPayment | currency }}
+            <canvas class="chart chart-bar" chart-data="data" chart-labels="labels"
+              chart-options="options" chart-series="series"></canvas>
             <button type="button" ng-click="isFlipped = !isFlipped">Return to Data</button>
           </figure>
         </div>
