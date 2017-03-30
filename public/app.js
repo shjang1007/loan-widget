@@ -14,7 +14,9 @@ app.factory("intRates", ["$http", ($http) => {
 }]);
 
 app.controller("BarCtrl", ["$scope", ($scope) => {
-  $scope.first = $scope.intRates;
+  $scope.first = $scope.$parent.intRates;
+  debugger
+  // Define a function that will take params of upper scope?
 
   // labels will be x-axis and series will be y-axis values
   $scope.labels = ['1', '2', '3', '4', '5', '6', '7'];
