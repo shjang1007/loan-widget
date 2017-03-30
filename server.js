@@ -14,7 +14,6 @@ app.use(sassMiddleware({
     debug: true,
     outputStyle: 'compressed'
 }));
-
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 

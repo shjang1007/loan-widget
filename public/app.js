@@ -33,3 +33,9 @@ app.controller("MainCtrl", ["$scope", "intRates", ($scope, intRates) => {
       $scope.intRates = response.data;
     });
 }]);
+
+
+// Create directive to draw graph and embed directive inside canvas
+app.directive("drawChart", () => {
+
+});
