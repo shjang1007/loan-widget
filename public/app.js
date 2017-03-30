@@ -26,8 +26,10 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       $scope.invalidSubmit = false;
       $scope.isFlipped = true;
       const monthlyIR = interestRate / 12;
-      $scope.monthlyPayment =
+      const unRoundedNum =
         (loanAmount * monthlyIR) / (1 - (1 + monthlyIR) ** -loanPeriod);
+      $scope.monthlyPayment = Math.round(unRoundedNum * 100) / 100
+
       $scope.labels = _.range(1, $scope.loanData.loanPeriod + 1);
       // $scope.series = ["Principal", "Interest"];
       $scope.series = ["Balance"]
@@ -37,9 +39,9 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       const principals = [];
       const interests = [];
       for (let i = 0; i < loanPeriod - 1; i++) {
-        let interest = balance * monthlyIR;
-        let principal = $scope.monthlyPayment - interest;
-        balance -= principal;
+        let interest = Math.round(balance * monthlyIR * 100) / 100;
+        let principal = Math.round(($scope.monthlyPayment - interest) * 100) / 100;
+        balance = Math.round((balance - principal) * 100) / 100;
         interests.push(interest);
         principals.push(principal);
         balances.push(balance)
