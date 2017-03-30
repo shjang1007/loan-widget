@@ -26,15 +26,17 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       $scope.invalidSubmit = false;
       $scope.isFlipped = true;
       const monthlyIR = interestRate / 12;
-      $scope.monthlyPayment = (loanAmount * monthlyIR) / (1 - (1 + monthlyIR) ** -loanPeriod);
+      $scope.monthlyPayment =
+        (loanAmount * monthlyIR) / (1 - (1 + monthlyIR) ** -loanPeriod);
       $scope.labels = _.range(1, $scope.loanData.loanPeriod + 1);
-      $scope.series = ["Principal", "Interest"];
+      // $scope.series = ["Principal", "Interest"];
+      $scope.series = ["Balance"]
 
       let balance = loanAmount;
       const balances = [];
       const principals = [];
       const interests = [];
-      while (balance > 0) {
+      for (let i = 0; i < loanPeriod - 1; i++) {
         let interest = balance * monthlyIR;
         let principal = $scope.monthlyPayment - interest;
         balance -= principal;
@@ -42,16 +44,17 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
         principals.push(principal);
         balances.push(balance)
       }
-
-      $scope.data = [principals, interests];
+      balances.push(0);
+      // $scope.data = [principals, interests];
+      $scope.data = [balances]
 
      // Possibly have to add legend display to display detailed info
-     $scope.options = {
-       scales: {
-         xAxes: [{stacked: true}],
-         yAxes: [{stacked: true}]
-       }
-      };
+    //  $scope.options = {
+    //    scales: {
+    //      xAxes: [{stacked: true}],
+    //      yAxes: [{stacked: true}]
+    //    }
+    //   };
     } else {
       $scope.invalidSubmit = true;
     }
