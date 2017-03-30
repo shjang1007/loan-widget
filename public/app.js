@@ -1,10 +1,5 @@
 const app = angular.module("loanWidget", ["chart.js"]);
 
-// create controller that fetches
-// Other than that it's all just functions
-// I need form
-// I need graph
-
 app.factory("intRates", ["$http", ($http) => {
   return {
     get: () => {
@@ -15,7 +10,6 @@ app.factory("intRates", ["$http", ($http) => {
 
 app.controller("BarCtrl", ["$scope", ($scope) => {
   $scope.first = $scope.$parent.intRates;
-  debugger
   // Define a function that will take params of upper scope?
 
   // labels will be x-axis and series will be y-axis values

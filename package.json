@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "node_modules/.bin/webpack --watch",
     "start": "nodemon server.js",
-    "sass": "node-sass sass/ -o public/styles"
+    "sass": "node-sass scss/ -o public/styles"
   },
   "keywords": [],
   "author": "Brian Jang",
