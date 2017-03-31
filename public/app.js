@@ -41,9 +41,11 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
         let interest = Math.round(balance * monthlyIR * 100) / 100;
         let principal = Math.round(($scope.monthlyPayment - interest) * 100) / 100;
         balance = Math.round((balance - principal) * 100) / 100;
+
+        balances.push(balance)
+        // More for future implementation to show breakdown of principal and interest
         interests.push(interest);
         principals.push(principal);
-        balances.push(balance)
       }
       balances.push(0);
       $scope.data = [balances];
@@ -99,16 +101,3 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       $scope.intRates = response.data;
     });
 }]);
-
-// app.controller("PaymentBreakDown", ["$scope", ($scope) => {
-//   $scope.series = ["Principal", "Interest"];
-//   $scope.data = [principals, interests];
-//
-//   // Possibly have to add legend display to display detailed info
-//   $scope.options = {
-//     scales: {
-//       xAxes: [{stacked: true}],
-//       yAxes: [{stacked: true}]
-//     }
-//   };
-// }]);
