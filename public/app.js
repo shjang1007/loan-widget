@@ -25,14 +25,19 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
     if (loanAmount && interestRate && loanPeriod) {
       $scope.invalidSubmit = false;
       $scope.isFlipped = true;
-      const monthlyIR = interestRate / 100 / 12;
-      const unRoundedNum =
-        (loanAmount * monthlyIR) / (1 - (1 + monthlyIR) ** -loanPeriod);
-      $scope.monthlyPayment = Math.round(unRoundedNum * 100) / 100
 
+      // Creating data for Angular-Chart
+      const monthlyIR = interestRate / 100 / 12;
+      const paymentBeforeRounding =
+        (loanAmount * monthlyIR) / (1 - (1 + monthlyIR) ** -loanPeriod);
+
+      $scope.monthlyPayment = Math.round(paymentBeforeRounding * 100) / 100;
+
+      // Labels are x-axis labels and serires are y-axis labels
       $scope.labels = _.range(1, $scope.loanData.loanPeriod + 1);
       $scope.series = ["Remaining Loan Amounts"]
 
+      // Calculation to break down balances and monthly payments
       let balance = loanAmount;
       const balances = [];
       const principals = [];
@@ -47,7 +52,10 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
         interests.push(interest);
         principals.push(principal);
       }
+      // Reamining balance at the end, which will be 0
       balances.push(0);
+
+      // All options to make charts more readable
       $scope.data = [balances];
       $scope.xAxisID	= "Months"
       $scope.options = {
@@ -92,10 +100,12 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
         }
       }
     } else {
+      // Error handling message toggle on and off
       $scope.invalidSubmit = true;
     }
   };
 
+  // Use service to fetch data
   intRates.get()
     .then( (response) => {
       $scope.intRates = response.data;
