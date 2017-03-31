@@ -9,7 +9,6 @@ const port = process.env.PORT || 8080;
 
 
 // Middleware
-
 app.use(sassMiddleware({
     src: __dirname + "/scss",
     dest: __dirname + "/public/styles",
@@ -33,7 +32,7 @@ app.get("/interest-rates", (req, res) => {
   res.send(loanInterestRateList);
 });
 
-  // load the single view file
+// load the single view file
 app.get('*', (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });

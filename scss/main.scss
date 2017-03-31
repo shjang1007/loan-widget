@@ -1,14 +1,11 @@
 // Variables
 // Fonts
-$serif: georgia,"times new roman",times,serif;
 $sans-serif: arial, helvetica, sans-serif;
 // Colors
-$lightest-gray: #f7f7f5;
-$light-gray: #e2e2e2;
+$light-gray: #f7f7f5;
 $gray: #8d8d8d;
 $dark-gray: #6f6f6f;
 $aqua-blue: #0abdff;
-$lightest-blue: #f0f8fc;
 $light-blue: #6288a5;
 $blue: #326891;
 $dark-blue: #4d7b9f;
@@ -18,7 +15,7 @@ body {
   font-family: $sans-serif;
   color: #666666;
   font-size: 14px;
-  background: $lightest-gray;
+  background: $light-gray;
   max-width: 1000px;
   margin: 0 auto;
 }

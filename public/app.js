@@ -19,6 +19,12 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
   $scope.isFlipped = false;
   $scope.loanData = {};
 
+  // Use service to fetch data
+  intRates.get()
+    .then( (response) => {
+      $scope.intRates = response.data;
+    });
+
   // Function that will handle form submission.
   $scope.handleSubmit = () => {
     const { loanAmount, interestRate, loanPeriod }  = $scope.loanData;
@@ -104,10 +110,4 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       $scope.invalidSubmit = true;
     }
   };
-
-  // Use service to fetch data
-  intRates.get()
-    .then( (response) => {
-      $scope.intRates = response.data;
-    });
 }]);
