@@ -48,18 +48,25 @@
         <div id="card" ng-class="{flipped: isFlipped}">
           <figure class="front">
             <form>
-              <p ng-show="invalidSubmit">You must fill in all the things!</p>
+              <p ng-show="invalidSubmit">
+                Please fill out all the fields!
+              </p>
               <label for="loan-amount">
                 Loan Amount:
-                <input id="loan-amount" type="number" ng-model="loanData.loanAmount">
+                <span>$
+                  <input id="loan-amount" type="number" min="0" ng-model="loanData.loanAmount">
+                </span>
               </label>
               <label for="interest-rate">
-                Interest Rate:
-                <input id="interest-rate" type="number" ng-model="loanData.interestRate">
+                Interest Rate(%):
+                <span>
+                  <input id="interest-rate" type="number" min="0" max="100" ng-model="loanData.interestRate">
+                  %
+                </span>
               </label>
               <label for="loan-period">
-                Loan Period:
-                <input id="loan-period" type="number" ng-model="loanData.loanPeriod">
+                Loan Period (Months):
+                <input id="loan-period" type="number" min="0" ng-model="loanData.loanPeriod">
               </label>
 
               <button type="button" ng-click="handleSubmit()">Calculate</button>

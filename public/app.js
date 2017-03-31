@@ -25,7 +25,7 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
     if (loanAmount && interestRate && loanPeriod) {
       $scope.invalidSubmit = false;
       $scope.isFlipped = true;
-      const monthlyIR = interestRate / 12;
+      const monthlyIR = interestRate / 100 / 12;
       const unRoundedNum =
         (loanAmount * monthlyIR) / (1 - (1 + monthlyIR) ** -loanPeriod);
       $scope.monthlyPayment = Math.round(unRoundedNum * 100) / 100
@@ -46,12 +46,16 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
         balances.push(balance)
       }
       balances.push(0);
-      $scope.data = [balances]
+      $scope.data = [balances];
+      $scope.xAxisID	= "Months"
       $scope.options = {
         legend: {
           display: true,
           position: "bottom"
-         },
+        },
+        animation: {
+          duration: 6000
+        },
         title: {
             display: true,
             text: "LoanWidget Chart"
@@ -69,6 +73,20 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
               return `Month ${tooltipItem[0].xLabel}`;
             }
           }
+        },
+        scales: {
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: "Month"
+            }
+          }, ],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: "Loan Amounts in $"
+            }
+          }]
         }
       }
     } else {
