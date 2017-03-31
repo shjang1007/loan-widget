@@ -47,42 +47,47 @@
     <h4>by Brian Jang</h4>
     <main ng-controller="MainCtrl">
       <section class="information-container">
-        <div class="intro-container">
-          <button type="button">Welcome!</button>
-          <ul>
-            <li>
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              Congratulations on your acceptance to the University.
-            </li>
-            <br>
-            <li>
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              This widget will help you visualize the loan payment over time.
-            </li>
-            <br>
-            <li>
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              Then, you will be able to have a better understanding of which loans may be the best fit for you.
-            </li>
-            <br>
-            <li>
-              Once again, congratulations!!
-              <i class="fa fa-smile-o" aria-hidden="true"></i>
-            </li>
-          </ul>
-        </div>
-        <div class="rates-container">
-          <button type="button">Show Current Rates</button>
-          <table>
-            <tr>
-              <th>Loan Type</th>
-              <th>Interest Rate</th>
-            </tr>
-            <tr ng-repeat="intRate in intRates">
-              <td>{{ intRate.loan }}</td>
-              <td>{{ intRate.rate }}%</td>
-            </tr>
-          </table>
+        <button class="responsive-button" type="button">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="responsive-container">
+          <div class="intro-container">
+            <button type="button">Welcome!</button>
+            <ul>
+              <li>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                Congratulations on your acceptance to the University.
+              </li>
+              <br>
+              <li>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                This widget will help you visualize the loan payment over time.
+              </li>
+              <br>
+              <li>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                Then, you will be able to have a better understanding of which loans may be the best fit for you.
+              </li>
+              <br>
+              <li>
+                Once again, congratulations!!
+                <i class="fa fa-smile-o" aria-hidden="true"></i>
+              </li>
+            </ul>
+          </div>
+          <div class="rates-container">
+            <button type="button">Show Current Rates</button>
+            <table>
+              <tr>
+                <th>Loan Type</th>
+                <th>Interest Rate</th>
+              </tr>
+              <tr ng-repeat="intRate in intRates">
+                <td>{{ intRate.loan }}</td>
+                <td>{{ intRate.rate }}%</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </section>
       <section class="card-container">
