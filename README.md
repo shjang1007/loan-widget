@@ -12,7 +12,7 @@
 
 ### Fetching Interest Rates
 
-  Current interest rates are fetched using `$http`'s `get` request to the node backend. Instead of populating the controller, through the use of the service factory function, this request is stored in the service:
+  Current interest rates are fetched using `$http`'s `get` request to the node backend. Instead of populating the controller, through the use of the service factory function, this request is stored as a service:
 
 ```JavaScript
 app.factory("intRates", ["$http", ($http) => {
@@ -25,7 +25,7 @@ app.factory("intRates", ["$http", ($http) => {
 ```
 
 ### Form
-  Using `ng-model`, user inputs are saved to the `MainCtrl` controller inside `$scope.loanData`. To restrict inputs to certain number values, `input` tags have `type="number"`, and `min` and `max` limits.
+  Using `ng-model`, user inputs are saved to the `MainCtrl` controller inside `$scope.loanData`. To restrict inputs to number and only certain range of values, `input` tags have `type="number"`, and `min` and `max` limits.
 
   ```html
     <input type="number" min="0" ng-model="loanData.loanAmount">
@@ -51,7 +51,7 @@ app.factory("intRates", ["$http", ($http) => {
 ### Responsive Design
 
   Used Flexbox to make the app more responsive.
-  Also implemented break point using `@media` query to change the outlook of the page.
+  Also implemented break point using `@media` query.
 
   <img src="./public/img/responsive-design.gif" alt="new-story"/>
 
