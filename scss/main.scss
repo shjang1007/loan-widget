@@ -17,10 +17,13 @@ $darkest-blue: #265e8b;
 body {
   font-family: $sans-serif;
   font-size: 16px;
-  font-weight: bold;
   background: $lightest-gray;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+main {
+  padding: 0 10px;
 }
 
 button {
@@ -54,6 +57,7 @@ header {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 30px;
+  padding: 0 10px;
   ul {
     display: flex;
 
@@ -69,14 +73,58 @@ header {
 
 h1, h4 {
   display: flex;
+  padding: 0 10px;
   justify-content: center;
   margin-top: 0;
 }
 
-table {
-  border-collapse: collapse;
-  text-align: center;
-  margin-bottom: 20px;
+.information-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.intro-container {
+  position: relative;
+  display: inline-block;
+
+  ul {
+    display: none;
+    position: absolute;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 200px;
+    background: white;
+    box-shadow: 0px 8px 16px 0px $dark-gray;
+    padding: 5px;
+    z-index: 1;
+  }
+
+  &:hover ul {
+    display: block;
+  }
+}
+
+.rates-container {
+  position: relative;
+  display: inline-block;
+
+  table {
+    display: none;
+    position: absolute;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px $dark-gray;
+    z-index: 1;
+  }
+
+  &:hover table {
+    display: block;
+  }
 }
 
 td, th {
@@ -103,7 +151,7 @@ form {
   p {
     color: red;
     align-self: center;
-    font-weight: normal;
+    font-weight: bold;
   }
 
   label {
@@ -155,10 +203,26 @@ input {
   }
 }
 .front {
+  height: 100%;
 }
 
 .back {
+  height: 100%;
   transform: rotateY( 180deg );
+
+  div {
+    display: flex;
+    font-size: 14px;
+    justify-content: flex-end;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    margin-bottom: 30px;
+  }
 }
 
 .flipped {

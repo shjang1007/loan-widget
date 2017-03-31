@@ -31,7 +31,7 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       $scope.monthlyPayment = Math.round(unRoundedNum * 100) / 100
 
       $scope.labels = _.range(1, $scope.loanData.loanPeriod + 1);
-      $scope.series = ["Balance"]
+      $scope.series = ["Remaining Loan Amounts"]
 
       let balance = loanAmount;
       const balances = [];
@@ -60,7 +60,7 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
         },
         title: {
             display: true,
-            text: "LoanWidget Chart"
+            text: "Loan Payment Over Time"
         },
         tooltips: {
           callbacks: {
