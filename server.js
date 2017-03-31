@@ -23,10 +23,10 @@ app.use(express.static(__dirname + "/public"));
 // Get loan info
 app.get("/interest-rates", (req, res) => {
   const loanInterestRateList = [
-    {loan: "subsidizedLoan", rate: 3.76},
-    {loan: "unsubsidizedLoan", rate: 3.76},
-    {loan: "privateBank", rate: 4.2},
-    {loan: "university", rate: 4}
+    {loan: "Direct Subsidized Loan", rate: 3.76},
+    {loan: "Direct Unsubsidized Loan", rate: 3.76},
+    {loan: "Private Bank", rate: 4.2},
+    {loan: "University", rate: 4}
   ];
 
   // Send requested from loanInterestRateList
