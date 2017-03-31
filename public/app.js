@@ -31,7 +31,6 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       $scope.monthlyPayment = Math.round(unRoundedNum * 100) / 100
 
       $scope.labels = _.range(1, $scope.loanData.loanPeriod + 1);
-      // $scope.series = ["Principal", "Interest"];
       $scope.series = ["Balance"]
 
       let balance = loanAmount;
@@ -47,16 +46,31 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
         balances.push(balance)
       }
       balances.push(0);
-      // $scope.data = [principals, interests];
       $scope.data = [balances]
-
-     // Possibly have to add legend display to display detailed info
-    //  $scope.options = {
-    //    scales: {
-    //      xAxes: [{stacked: true}],
-    //      yAxes: [{stacked: true}]
-    //    }
-    //   };
+      $scope.options = {
+        legend: {
+          display: true,
+          position: "bottom"
+         },
+        title: {
+            display: true,
+            text: "LoanWidget Chart"
+        },
+        tooltips: {
+          callbacks: {
+            label: (tooltipItem, data) => {
+              const label = data.datasets[tooltipItem.datasetIndex].label;
+              // Format number using delimiter
+              const remainingLoan = tooltipItem.yLabel.toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              return `${label}: $${remainingLoan}`;
+            },
+            title: (tooltipItem, data) => {
+              return `Month ${tooltipItem[0].xLabel}`;
+            }
+          }
+        }
+      }
     } else {
       $scope.invalidSubmit = true;
     }
@@ -67,3 +81,16 @@ app.controller("MainCtrl", ["$scope", "intRates", "_",
       $scope.intRates = response.data;
     });
 }]);
+
+// app.controller("PaymentBreakDown", ["$scope", ($scope) => {
+//   $scope.series = ["Principal", "Interest"];
+//   $scope.data = [principals, interests];
+//
+//   // Possibly have to add legend display to display detailed info
+//   $scope.options = {
+//     scales: {
+//       xAxes: [{stacked: true}],
+//       yAxes: [{stacked: true}]
+//     }
+//   };
+// }]);
